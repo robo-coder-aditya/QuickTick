@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Env files
+.env
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+
+# Session or debug files
+*.sqlite

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickTick Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-white flex flex-col">
+
+  <header class="flex justify-between items-center bg-[#FFF0E6] px-4 md:px-6 py-4">
+    <div class="text-[#F88837] text-xl md:text-2xl font-semibold">QuickTick</div>
+    <div class="flex items-center space-x-4">
+      <a href="/profile" class="flex items-center space-x-3 hover:opacity-80">
+        <img src="./assets/Profile.png" alt="Profile picture" class="w-12 h-12 rounded-full object-cover" />
+        <div class="text-right">
+          <div class="text-black text-lg font-medium"><%= username %></div>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-1 items-start">
+
+  <aside class="flex md:flex-col bg-white md:w-56 p-2 md:p-4 gap-2 md:gap-4 border-b-2 md:border-b-0 md:border-r-2 border-[#FFF0E6] ml-1.5 min-h-screen">
+    
+    <a href="/daily" class="block">
+      <div class="flex items-center gap-2 md:gap-3 p-2 rounded-md">
+        <img src="/assets/Home.png" alt="Dashboard icon" class="w-5 h-5">
+        <span class="text-[#F88837] text-sm md:text-base font-medium">Dashboard</span>
+      </div>
+    </a>
+  </aside>
+
+  <main class="flex-1 flex flex-col items-start p-8 ml-6 space-y-8">
+    <h2 class="text-black text-[40px] font-medium leading-[60px]">Your Account</h2>
+
+    <% if (locals.successMessage) { %>
+      <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded w-full max-w-[646px] text-center text-sm">
+        <p><%= successMessage %></p>
+      </div>
+    <% } %>
+
+    <div class="border border-[#F88837] rounded-[15px] w-full max-w-[646px] p-6 space-y-1">
+      <div class="flex">
+        <h3 class="text-black text-[24px] font-medium">Change password</h3>
+        <a href="/changePassword" class="ml-auto">
+          <img src="/assets/Expand Arrow.png" alt="Open" class="w-5 h-5">
+        </a>
+      </div>
+      <p class="text-black text-[16px]">You can change your password here</p>
+      
+    </div>
+
+    <!-- <a href="/changePassword" class="block w-full max-w-[646px]">
+        <div class="border border-[#F88837] rounded-[15px] w-full max-w-[646px] p-6 space-y-1 hover:cursor-pointer">
+            <div class="flex">
+            <h3 class="text-black text-[24px] font-medium">Change password</h3>
+            </div>
+            <p class="text-black text-[16px]">You can change your password here</p>
+        </div>
+    </a> -->
+
+
+    <div class="border border-[#FE9950] rounded-[15px] w-full max-w-[646px] p-6">
+      <p class="text-black text-[24px] font-medium">Log out</p>
+      <p class="text-black text-[16px] mb-4">You will be logged out from your account</p>
+      <a href="/logout" 
+        class="bg-[#EC0909] text-white text-[20px] font-medium w-full max-w-[593px] py-3 rounded-[10px] hover:bg-red-700 transition text-center block">
+        Log out
+      </a>
+
+    </div>
+  </main>
+</div>
+
+
+</body>
+</html>

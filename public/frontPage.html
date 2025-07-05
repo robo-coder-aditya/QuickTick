@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickTick Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800 font-['Inter'] leading-relaxed">
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center px-[10%] py-5 bg-white shadow">
+    <div class="font-bold text-2xl text-[#F99750]">QuickTick</div>
+    <nav class="flex items-center space-x-4">
+      <a href="/loginform" class="font-medium text-[#F99750] hover:text-orange-600 active:text-orange-700 transition">Login</a>
+      <a href="/signup" class="bg-[#F99750] text-white px-4 py-2 rounded-md font-medium hover:bg-orange-600 active:bg-orange-700 transition focus:outline-none focus:ring-2 focus:ring-[#F99750]">Sign Up</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="flex flex-wrap justify-between items-center px-[10%] py-16 bg-gradient-to-b from-[#FFEEE4] to-white">
+    <div class="max-w-xl mb-8 md:mb-0">
+      <h1 class="text-4xl font-semibold mb-4">Organize Your Life with QuickTick</h1>
+      <p class="text-lg mb-6">A simple and intuitive way to manage your daily tasks</p>
+      <a href="/signup" class="inline-block bg-[#F99750] text-white px-5 py-3 rounded-md font-semibold hover:bg-orange-600 active:bg-orange-700 transition focus:outline-none focus:ring-2 focus:ring-[#F99750]">Get Started with us &gt;</a>
+    </div>
+    <div>
+      <img src="/assets/checklist.png" alt="Illustration of a checklist" class="w-[500px] max-w-full" />
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="flex flex-wrap justify-around items-center text-center px-[10%] py-10 bg-[#FFF4EF]">
+    <div class="m-4 max-w-xs">
+      <img src="/assets/To Do List.png" alt="Task list icon" class="h-12 w-12 mx-auto mb-2" />
+      <h3 class="font-semibold mb-2">Easy Task Management</h3>
+      <p>Create, organize, and complete tasks with ease</p>
+    </div>
+    <div class="m-4 max-w-xs">
+      <img src="/assets/Bar Chart.png" alt="Progress tracking icon" class="h-12 w-12 mx-auto mb-2" />
+      <h3 class="font-semibold mb-2">Track Your Progress</h3>
+      <p>Monitor your productivity with visual insights</p>
+    </div>
+    <div class="m-4 max-w-xs">
+      <img src="/assets/Users.png" alt="Team collaboration icon" class="h-12 w-12 mx-auto mb-2" />
+      <h3 class="font-semibold mb-2">Collaborate With Your Team</h3>
+      <p>Share tasks and work together seamlessly</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="px-[10%] py-16 bg-white text-center">
+    <h2 class="text-2xl font-semibold mb-10">What Our Users Say</h2>
+    <div class="flex flex-wrap justify-center gap-6">
+      <article class="border border-gray-200 rounded-xl p-5 w-80 text-left hover:shadow-md transition">
+        <div class="flex items-center mb-3">
+          <img src="/assets/User-1.png" alt="Photo of Sarah Johnson" class="w-12 h-12 rounded-full mr-4 object-cover" />
+          <div>
+            <h4 class="font-medium">Sarah Johnson</h4>
+            <p class="text-sm text-gray-500">Product Manager</p>
+          </div>
+        </div>
+        <p class="text-yellow-500 mb-2">⭐⭐⭐⭐⭐</p>
+        <p>QuickTick has transformed how I manage my daily tasks. It’s intuitive and powerful.</p>
+      </article>
+      <article class="border border-gray-200 rounded-xl p-5 w-80 text-left hover:shadow-md transition">
+        <div class="flex items-center mb-3">
+          <img src="/assets/User-2.png" alt="Photo of Williams" class="w-12 h-12 rounded-full mr-4 object-cover" />
+          <div>
+            <h4 class="font-medium">Williams</h4>
+            <p class="text-sm text-gray-500">Developer</p>
+          </div>
+        </div>
+        <p class="text-yellow-500 mb-2">⭐⭐⭐⭐⭐</p>
+        <p>The best task management tool I’ve ever used. Simple yet incredibly effective.</p>
+      </article>
+      <article class="border border-gray-200 rounded-xl p-5 w-80 text-left hover:shadow-md transition">
+        <div class="flex items-center mb-3">
+          <img src="/assets/User-3.png" alt="Photo of Ava Chen" class="w-12 h-12 rounded-full mr-4 object-cover" />
+          <div>
+            <h4 class="font-medium">Ava Chen</h4>
+            <p class="text-sm text-gray-500">Student</p>
+          </div>
+        </div>
+        <p class="text-yellow-500 mb-2">⭐⭐⭐⭐</p>
+        <p>Great tool to stay organized—just wish it had more theme options!</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="flex flex-wrap justify-evenly items-start gap-10 text-left px-[10%] py-10 bg-gray-100">
+    <div class="max-w-xs">
+      <h3 class="mb-2 text-[#F99750] font-semibold">QuickTick</h3>
+      <p class="text-sm text-gray-600">Making task management simple and efficient for everyone.<br />Organize your way. Feel the reward of getting things done.</p>
+    </div>
+    <div class="max-w-xs">
+      <h3 class="mb-2 text-[#F99750] font-semibold">FAQ</h3>
+      <a href="/faq" class="text-gray-800 text-sm no-underline hover:text-[#F99750] transition">View FAQs</a>
+    </div>
+    <div class="max-w-xs">
+      <h3 class="mb-2 text-[#F99750] font-semibold">Contact Us</h3>
+      <p class="text-sm text-gray-600">📞 +91-2406202589</p>
+      <p class="text-sm text-gray-600">📧 quicktick@gmail.com</p>
+    </div>
+  </footer>
+  <div class="bg-gray-50 text-center py-4 text-xs text-gray-500">
+    © 2025 QuickTick. All rights reserved
+  </div>
+</body>
+</html>

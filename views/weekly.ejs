@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickTick Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between bg-[#FFF0E6] px-8 py-4">
+    <h1 class="text-2xl font-semibold text-[#F88837]">QuickTick</h1>
+    <div class="flex items-center space-x-4">
+      <a href="/profile" class="flex items-center space-x-3 hover:opacity-80">
+        <img src="/assets/Profile.png" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
+        <div class="text-right">
+          <div class="text-black text-lg font-medium"><%= username %></div>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <main class="flex flex-col md:flex-row flex-1">
+    <div class="flex">
+
+      <!-- Sidebar -->
+      <aside class="flex md:flex-col bg-[#FFFFFF] md:w-56 p-2 md:p-4 gap-2 md:gap-4 border-b-2 md:border-b-0 md:border-r-2 border-[#FFF0E6] ml-1.5">
+        <div class="flex items-center bg-[#FFF0E6] rounded px-6 py-2 mt-8">
+          <img src="/assets/Home.png" alt="Home" class="w-5 h-5 mr-2">
+          <span class="text-[#F88837] font-medium">Dashboard</span>
+        </div>
+      </aside>
+
+      <!-- Main Section -->
+      <section class="flex-1 ml-8 p-5">
+        <h2 class="text-4xl font-semibold text-black mb-1">Welcome <%= username %>!</h2>
+        <p class="text-[#4E4E4E]"><%= today %></p>
+
+        <!-- Navigation -->
+        <div class="flex items-center justify-between mt-6 gap-x-64">
+          <div class="flex border border-[#F88837] rounded overflow-hidden gap-16 py-2 px-2">
+            <a href="/daily" class="px-14 text-[#F88837] font-medium rounded-lg py-1">Today</a>
+            <a href="/weekly" class="bg-[#F88837] text-white px-14 font-medium rounded-lg py-1">This Week</a>
+            <a href="/monthly" class="px-14 text-[#F88837] font-medium rounded-lg py-1">This Month</a>
+          </div>
+          <a href="/addWeekly" class="flex items-center bg-[#F88837] text-white px-4 py-2 rounded-lg font-medium">
+            <span class="text-xl mr-2">+</span> Add new task
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-4 justify-evenly gap-10 mt-6">
+          <div class="border border-[#3A9CA7] rounded py-4 px-12 text-center">
+            <div class="text-lg text-[#464646]">Total Tasks</div>
+            <div class="text-2xl font-semibold"><%= totalTasks %></div>
+          </div>
+          <div class="border border-[#E78484] rounded py-4 px-12 text-center">
+            <div class="text-lg text-[#464646]">In Progress</div>
+            <div class="text-2xl font-semibold"><%= inProgress %></div>
+          </div>
+          <div class="border border-[#78D940] rounded py-4 px-12 text-center">
+            <div class="text-lg text-[#464646]">Completed</div>
+            <div class="text-2xl font-semibold"><%= completed %></div>
+          </div>
+        </div>
+
+        <!-- Task Section -->
+        <div class="grid grid-cols-2 gap-24 mt-6">
+          <!-- Current Tasks -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-medium">Current tasks</h3>
+            <% for (let task of currentTasks) { %>
+              <div class="relative bg-[#FFF0E6] rounded-lg p-4 pr-12 max-w-lg break-words whitespace-normal">
+                <div class="flex gap-4">
+                  <!-- Checkbox -->
+                  <form action="/deleteWeekly" method="post">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="checkbox" class="form-checkbox mt-1" onchange="this.form.submit()" name="deleteTaskId" value="<%= task.id %>">
+                  </form>
+
+                  <!-- Task Info -->
+                  <div class="flex-1 min-w-0">
+                    <div id="title<%=task.id%>" class="font-medium text-black break-words"><%= task.title %></div>
+                    <div id="note<%=task.id%>" class="text-[#999999] text-sm break-words"><%= task.note %></div>
+
+                    <!-- Edit Form -->
+                    <form action="/editWeekly" method="POST" class="mt-2">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      <input type="hidden" name="updatedTaskId" value="<%= task.id %>">
+                      <div class="flex flex-col gap-2"> <!-- Inputs stacked vertically -->
+                        <!-- First Input: Title -->
+                        <input id="inputTask<%=task.id%>" type="text" name="updatedTaskTitle" value="<%= task.title %>" hidden required class="rounded-lg text-sm w-52 px-2 py-2" />
+                        <!-- Second Input: Note (smaller) -->
+                        <input id="inputNote<%=task.id%>" type="text" name="updatedTaskNote" value="<%= task.note %>" hidden required class="rounded-lg text-sm w-40 px-2 py-1" />
+                      </div>
+
+                      <!-- Icons -->
+                      <div class="absolute top-4 right-4 flex space-x-2">
+                        <button id="edit<%=task.id%>" type="button" onclick="handler('<%=task.id%>')">
+                          <img class="w-4 h-4" src="/assets/pencil-solid.svg" alt="edit">
+                        </button>
+                        <button id="done<%=task.id%>" type="submit" hidden>
+                          <img class="w-4 h-4" src="/assets/check-solid.svg" alt="done">
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          </div>
+
+          <!-- Completed Tasks -->
+          <div class="space-y-4">
+            <h3 class="text-2xl font-medium">Completed tasks</h3>
+            <% for (let task of completedTasks) { %>
+              <div class="flex items-start border border-[#F88837] rounded-lg p-4 pr-6 max-w-lg break-words whitespace-normal">
+                <div class="flex-1 flex items-start gap-4 overflow-hidden">
+                  <img src="/assets/checkbox.png" class="w-5 h-5 mt-1" alt="checked box">
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium text-gray-700 line-through decoration-gray-400 break-words"><%= task.title %></div>
+                    <div class="text-[#999999] text-sm"><%= new Date(task.completion_time).toLocaleDateString('en-GB') %></div>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Script -->
+  <script>
+    function handler(id) {
+      document.getElementById("title" + id).hidden = true;
+      document.getElementById("note" + id).hidden = true;
+      document.getElementById("inputTask" + id).hidden = false;
+      document.getElementById("inputNote" + id).hidden = false;
+      document.getElementById("edit" + id).hidden = true;
+      document.getElementById("done" + id).hidden = false;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Task</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-white flex flex-col">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center bg-[#FFF0E6] px-4 md:px-6 py-4">
+    <div class="text-[#F88837] text-xl md:text-2xl font-semibold">QuickTick</div>
+    <div class="flex items-center space-x-4">
+      <a href="/profile" class="flex items-center space-x-3 hover:opacity-80">
+        <img src="/assets/Profile.png" alt="Profile picture" class="w-12 h-12 rounded-full object-cover" />
+        <div class="text-right">
+          <div class="text-black text-lg font-medium"><%= username %></div>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <div class="flex flex-1">
+    <aside class="flex md:flex-col bg-white md:w-56 p-2 md:p-4 gap-2 md:gap-4 border-b-2 md:border-b-0 md:border-r-2 border-[#FFF0E6] ml-1.5">
+      <div class="flex items-center gap-2 md:gap-3 p-2 md:bg-[#FFF0E6] rounded-md">
+        <img src="/assets/Home.png" alt="Dashboard icon" class="w-5 h-5">
+        <span class="text-[#F88837] text-sm md:text-base font-medium">Dashboard</span>
+      </div>
+    </aside>
+
+    <main class="flex-1 flex justify-center items-center my-auto px-8">
+      <div class="bg-[#FFF0E6] border border-black shadow-md rounded-[40px] w-full max-w-2xl py-12 px-12">
+        <h2 class="text-[#F88837] font-semibold text-3xl mb-8 text-center pb-2">Add new task</h2>
+
+        <% if (locals.errorMessage) { %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm max-w-md mx-auto text-center">
+            <p><%= errorMessage %></p>
+          </div>
+        <% } %>
+
+        <form method="POST" action="/addDaily" class="space-y-6">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <div>
+            <label class="block text-[#3A3939] font-medium text-lg mb-2">Task name</label>
+            <input type="text" name ="newTaskTitle" value="<%= locals.oldTitle ? locals.oldTitle : '' %>" placeholder="Enter your task name"
+              class="w-full bg-white rounded-md px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F88837]" />
+          </div>
+          <div>
+            <label class="block text-[#3A3939] font-medium text-lg mb-2">Scheduled time</label>
+            <input type="time" name = "newTaskTime" value = "<%= locals.oldTime ? locals.oldTime : '' %>" placeholder="00:00 (in 24 hr format)"
+              class="w-full bg-white rounded-md px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#F88837]" />
+          </div>
+          <div class="flex justify-center py-4">
+            <button type="submit"
+              class="bg-[#FE9950] text-white font-medium text-lg px-8 py-3 rounded-md hover:bg-[#f88837] focus:outline-none focus:ring-2 focus:ring-[#F88837] transition mt-2">
+              Continue
+            </button>
+          </div>
+        </form>
+
+        <div class="flex justify-center mt-2">
+          <a href="/daily" class="text-blue-500 hover:underline text-base">
+            Go Back
+          </a>
+        </div>
+        
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

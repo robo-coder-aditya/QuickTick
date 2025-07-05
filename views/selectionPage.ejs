@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickTick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    input[type="radio"]:checked + label {
+      border-width: 4px;
+      border-color: #FE9950;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white flex flex-col">
+
+  <header class="flex justify-between items-center bg-[#FFF0E6] px-4 md:px-6 py-4">
+    <div class="text-[#F88837] text-xl md:text-2xl font-semibold">QuickTick</div>
+    <a href="/profile" class="flex items-center space-x-3 hover:opacity-80">
+      <img src="/assets/Profile.png" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
+      <span class="text-black text-base md:text-lg font-medium"><%= username %></span>
+    </a>
+  </header>
+
+  <div class="flex flex-col md:flex-row flex-1">
+    <aside class="flex md:flex-col bg-[#FFFFFF] md:w-56 p-2 md:p-4 gap-2 md:gap-4 border-b-2 md:border-b-0 md:border-r-2 border-[#FFF0E6] ml-1.5">
+      <div class="flex items-center gap-2 md:gap-3 p-2 md:bg-[#FFF0E6] rounded-md">
+          <img src="/assets/Home.png" alt="Home" class="w-5 h-5 mr-2">
+        <span class="text-[#F88837] text-sm md:text-base font-medium">Dashboard</span>
+      </div>
+    </aside>
+
+    <main class="flex-1 flex items-center justify-center p-4 md:p-6">
+      <div class="bg-[#FFF0E6] rounded-[20px] md:rounded-[40px] border border-black shadow-md backdrop-blur-[2px] w-full max-w-3xl p-4 md:p-20 flex flex-col items-center space-y-6 md:space-y-8 mx-8">
+
+        <h1 class="text-[#F88837] text-xl md:text-3xl font-semibold text-center">
+          Plan your productivity!
+        </h1>
+
+        <p class="text-[#5B5959] text-sm md:text-lg font-medium text-center">
+          Choose how you would like to plan your tasks:
+        </p>
+
+        <% if (locals.errorMessage) { %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm max-w-md mx-auto text-center">
+            <p><%= errorMessage %></p>
+          </div>
+        <% } %>
+
+        <form method = "POST" action = "/select">
+          <div class="flex flex-col md:flex-row gap-4 md:gap-8 w-full justify-center items-center">
+            <div class="flex-1 md:flex-none">
+              <input type="radio" id="today" name="plan" value="daily" class="hidden peer">
+              <label for="today" class="flex items-center justify-center w-40 h-24 md:h-28 mx-auto bg-white border border-[#FE9950] rounded-lg shadow cursor-pointer hover:shadow-md">
+                <span class="text-[#3A3939] text-base md:text-lg font-medium">Today</span>
+              </label>
+            </div>
+            <div class="flex-1 md:flex-none">
+              <input type="radio" id="weekly" name="plan" value="weekly" class="hidden peer">
+              <label for="weekly" class="flex items-center justify-center mx-auto w-40 h-24 md:h-28 bg-white border border-[#FE9950] rounded-lg shadow cursor-pointer hover:shadow-md">
+                <span class="text-[#3A3939] text-base md:text-lg font-medium">This Week</span>
+              </label>
+            </div>
+            <div class="flex-1 md:flex-none">
+              <input type="radio" id="monthly" name="plan" value="monthly" class="hidden peer">
+              <label for="monthly" class="flex items-center justify-center mx-auto w-40 h-24 md:h-28 bg-white border border-[#FE9950] rounded-lg shadow cursor-pointer hover:shadow-md">
+                <span class="text-[#3A3939] text-base md:text-lg font-medium">This Month</span>
+              </label>
+            </div>
+          </div>
+
+          <br>
+          <button type="submit" class="w-full md:w-56 h-12 md:h-16 flex items-center justify-center mx-auto mt-5 bg-[#FE9950] rounded-[10px] text-white text-base md:text-xl font-medium hover:bg-[#e58844]">
+            Continue
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
