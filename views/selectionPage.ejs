@@ -50,6 +50,7 @@
         <% } %>
 
         <form method = "POST" action = "/select">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <div class="flex flex-col md:flex-row gap-4 md:gap-8 w-full justify-center items-center">
             <div class="flex-1 md:flex-none">
               <input type="radio" id="today" name="plan" value="daily" class="hidden peer">
