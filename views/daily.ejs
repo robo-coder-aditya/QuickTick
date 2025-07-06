@@ -87,7 +87,7 @@
                   <!-- Task Info -->
                   <div class="flex-1 min-w-0">
                     <div id="title<%=task.id%>" class="font-medium text-black break-words"><%= task.title %></div>
-                    <div id="time<%=task.id%>" class="text-[#999999] text-sm break-words"><%= <%= task.scheduled_time ? task.scheduled_time.slice(0, 5) : '' %> %></div>
+                    <div id="time<%=task.id%>" class="text-[#999999] text-sm break-words"><%= task.scheduled_time ? task.scheduled_time.slice(0, 5) : '' %></div>
 
                     <!-- Edit Form -->
                     <form action="/editDaily" method="POST" class="mt-2">
@@ -97,7 +97,7 @@
                         <!-- First Input: Title -->
                         <input id="inputTask<%=task.id%>" type="text" name="updatedTaskTitle" value="<%= task.title %>" hidden required class="rounded-lg text-sm w-52 px-2 py-2" />
                         <!-- Second Input: Note (smaller) -->
-                        <input id="inputTime<%=task.id%>" type="time" name="updatedTaskTime" value="<%= <%= task.scheduled_time ? task.scheduled_time.slice(0, 5) : '' %>%>" hidden required class="rounded-lg text-sm w-40 px-2 py-1" />
+                        <input id="inputTime<%=task.id%>" type="time" name="updatedTaskTime" value="<%= task.scheduled_time ? task.scheduled_time.slice(0, 5) : '' %>" hidden required class="rounded-lg text-sm w-40 px-2 py-1" />
                       </div>
 
                       <!-- Icons -->
