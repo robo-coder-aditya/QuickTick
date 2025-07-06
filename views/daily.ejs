@@ -122,7 +122,16 @@
             <% for (let task of completedTasks) { %>
               <div class="flex items-start border border-[#F88837] rounded-lg p-4 pr-6 max-w-lg break-words whitespace-normal">
                 <div class="flex-1 flex items-start gap-4 overflow-hidden">
-                  <img src="/assets/checkbox.png" class="w-5 h-5 mt-1" alt="checked box">
+
+                  <form action="/revertDaily" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="hidden" name="taskId" value="<%= task.id %>">
+                    <input type="hidden" name = "taskTitle" value = "<%= task.title %>">
+                    <button type="submit" class="hover:shadow-md hover:scale-105 transition duration-150 rounded-full">
+                      <img src="/assets/checkbox.png" class="w-5 h-5 mt-1" alt="checked box">
+                    </button>
+                  </form>
+
                   <div class="flex-1 min-w-0">
                     <div class="font-medium text-gray-700 line-through decoration-gray-400 break-words"><%= task.title %></div>
                     <div class="text-[#999999] text-sm"><%=new Date(task.completion_time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) %></div>

@@ -361,18 +361,10 @@ app.post("/addDaily", isAuthenticated, async(req, res)=>{
     const taskTitle = req.body.newTaskTitle.trim();
     const taskTime = req.body.newTaskTime.trim();
     
-    if(taskTitle === "" && taskTime==="") return res.render("addDailyForm", {
-        username: username,
-        errorMessage: "Please enter the task and scheduled time"});
     if(taskTitle === "") return res.render("addDailyForm", {
         username: username,
         oldTime: taskTime,
         errorMessage: "Please enter the task"});
-    if(taskTime === "") return res.render("addDailyForm", {
-        username: username,
-        oldTitle: taskTitle,
-        errorMessage: "Please schedule a time for the task"});
-
     try{
 
         await db.query("INSERT INTO daily(user_id, title, scheduled_time) VALUES ($1, $2, $3)", [userId, taskTitle, taskTime]);
@@ -383,6 +375,26 @@ app.post("/addDaily", isAuthenticated, async(req, res)=>{
         res.status(500).sendFile(path.join(__dirname, "public", "errorPage500.html"));
     }
     
+})
+
+//to revert a daily task
+app.post("/revertDaily", isAuthenticated, async (req, res) =>{
+
+    try{
+        const userId = req.session.userId;
+        const taskTitle = req.body.taskTitle;
+        const taskId = req.body.taskId;
+
+        await db.query("DELETE FROM completed where id = $1 AND user_id = $2", [taskId, userId]);
+
+        await db.query("INSERT INTO daily(title, user_id) values($1, $2)", [taskTitle, userId]);
+        
+        res.redirect("/daily");
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).sendFile(path.join(__dirname, "public", "errorPage500.html"));
+    }
 })
 
 //to delete a weekly task, and add it to completed;
@@ -464,6 +476,25 @@ app.post("/addWeekly", isAuthenticated, async(req, res)=>{
     }
 });
 
+//to revert a weekly task
+app.post("/revertWeekly", isAuthenticated, async (req, res) =>{
+    try{
+        const userId = req.session.userId;
+        const taskTitle = req.body.taskTitle;
+        const taskId = req.body.taskId;
+
+        await db.query("DELETE FROM completed where id = $1 AND user_id = $2", [taskId, userId]);
+
+        await db.query("INSERT INTO weekly(title, user_id) values($1, $2)", [taskTitle, userId]);
+        
+        res.redirect("/weekly");
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).sendFile(path.join(__dirname, "public", "errorPage500.html"));
+    }
+})
+
 //to delete a task from monthly tasks and add to completed;
 app.post("/deleteMonthly", isAuthenticated, async(req, res)=> {
     try{
@@ -534,6 +565,26 @@ app.post("/addMonthly", isAuthenticated, async(req, res) =>{
     try{
 
         await db.query("INSERT INTO monthly(user_id, title, note) VALUES ($1, $2, $3)", [userId, taskTitle, taskNote]);
+        res.redirect("/monthly");
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).sendFile(path.join(__dirname, "public", "errorPage500.html"));
+    }
+})
+
+//to revert a monthly task
+app.post("/revertMonthly", isAuthenticated, async(req, res) =>{
+
+    try{
+        const userId = req.session.userId;
+        const taskTitle = req.body.taskTitle;
+        const taskId = req.body.taskId;
+
+        await db.query("DELETE FROM completed where id = $1 AND user_id = $2", [taskId, userId]);
+
+        await db.query("INSERT INTO monthly(title, user_id) values($1, $2)", [taskTitle, userId]);
+        
         res.redirect("/monthly");
     }
     catch(error){
