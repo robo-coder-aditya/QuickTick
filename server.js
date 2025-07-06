@@ -24,16 +24,13 @@ app.use(express.urlencoded({extended: true}));
 
 const pgSessionStore = pgSession(session); 
 
-const pool = new pg.Pool({
+const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
-
-
-db.connect();
 
 app.use(session({
   store: new pgSessionStore({
