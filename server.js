@@ -445,7 +445,7 @@ app.post("/editWeekly", isAuthenticated, async(req, res) =>{
 
 //to render add weekly task form
 app.get("/addWeekly", isAuthenticated, (req, res)=>{
-    res.render("addWeeklyForm", {
+    res.render("addWeeklyform", {
         oldNote: "",
         username: req.session.username});
 })
@@ -459,7 +459,7 @@ app.post("/addWeekly", isAuthenticated, async(req, res)=>{
     const taskNote = req.body.newTaskNote.trim();
     const username = req.session.username;
     
-    if(taskTitle === "") return res.render("addWeeklyForm", {
+    if(taskTitle === "") return res.render("addWeeklyform", {
         username: username,
         errorMessage: "Please enter the task",
         oldNote: taskNote
