@@ -63,6 +63,8 @@ app.use((req, res, next) => {
 //front-page
 app.get("/", (req, res) =>{
     res.sendFile(path.join(__dirname, "public", "frontPage.html"));
+
+    console.log("Database URL: ", process.env.DATABASE_URL);
 })
 
 //to get the signup form
